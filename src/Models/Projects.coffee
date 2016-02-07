@@ -28,47 +28,47 @@ class Projects extends BaseModel
 
   show: (projectId, fn=null) =>
     @debug "Projects::show()"
-    @get "projects/#{Utils.parseProjectId projectId}", (data) => fn data if fn
+    @get "projects/#{Utils.parseProjectId projectId}", fn
 
   create: (params={}, fn=null) =>
     @debug "Projects::create()"
-    @post "projects", params, (data) -> fn data if fn
+    @post "projects", params, fn
 
   create_for_user: (params={}, fn=null) =>
     @debug "Projects::create_for_user()"
-    @post "projects/user/#{params.user_id}", params, (data) -> fn data if fn
+    @post "projects/user/#{params.user_id}", params, fn
 
   edit: (projectId, params={}, fn=null) =>
     @debug "Projects::edit()"
-    @put "projects/#{Utils.parseProjectId projectId}", params, (data) -> fn data if fn
+    @put "projects/#{Utils.parseProjectId projectId}", params, fn
 
   addMember: (params={}, fn=null) =>
     @debug "Projects::addMember()"
-    @post "projects/#{params.id}/members", params, (data) -> fn data if fn
+    @post "projects/#{params.id}/members", params, fn
 
   editMember: (params={}, fn=null) =>
     @debug "Projects::editMember()"
-    @put "projects/#{params.id}/members/#{params.user_id}", params, (data) -> fn data if fn
+    @put "projects/#{params.id}/members/#{params.user_id}", params, fn
 
   listMembers: (params={}, fn=null) =>
     @debug "Projects::listMembers()"
-    @get "projects/#{params.id}/members", (data) -> fn data if fn
+    @get "projects/#{params.id}/members", fn
 
   listCommits: (params={}, fn=null) =>
     @debug "Projects::listCommits()"
-    @get "projects/#{params.id}/repository/commits", params, (data) => fn data if fn
+    @get "projects/#{params.id}/repository/commits", params, fn
 
   listTags: (params={}, fn=null) =>
     @debug "Projects::listTags()"
-    @get "projects/#{params.id}/repository/tags", (data) => fn data if fn
+    @get "projects/#{params.id}/repository/tags", fn
 
   remove: (projectId, fn = null) =>
     @debug "Projects::remove()"
-    @delete "projects/#{Utils.parseProjectId projectId}", (data) => fn data if fn
+    @delete "projects/#{Utils.parseProjectId projectId}", fn
 
   fork: (params={}, fn=null) =>
     @debug "Projects::fork()"
-    @post "projects/fork/#{params.id}", params, (data) -> fn data if fn
+    @post "projects/fork/#{params.id}", params, fn
 
   search: (projectName, params={}, fn=null) =>
     if 'function' is typeof params
@@ -76,6 +76,6 @@ class Projects extends BaseModel
       params={}
 
     @debug "Projects::search()"
-    @get "projects/search/#{projectName}", params, (data) => fn data if fn
+    @get "projects/search/#{projectName}", params, fn
 
 module.exports = (client) -> new Projects client

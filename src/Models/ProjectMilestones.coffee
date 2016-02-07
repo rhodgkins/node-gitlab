@@ -17,7 +17,7 @@ class ProjectMilestones extends BaseModel
 
   show: (projectId, milestoneId, fn = null) =>
     @debug "Projects::milestone()"
-    @get "projects/#{Utils.parseProjectId projectId}/milestones/#{parseInt milestoneId}", (data) => fn data if fn
+    @get "projects/#{Utils.parseProjectId projectId}/milestones/#{parseInt milestoneId}", fn
 
   add: (projectId, title, description, due_date, fn = null) =>
     @debug "Projects::addMilestone()"
@@ -26,7 +26,7 @@ class ProjectMilestones extends BaseModel
       title: title
       description: description
       due_date: due_date
-    @post "projects/#{Utils.parseProjectId projectId}/milestones", params, (data) => fn data if fn
+    @post "projects/#{Utils.parseProjectId projectId}/milestones", params, fn
 
   update: (projectId, milestoneId, title, description, due_date, state_event, fn = null) =>
     @debug "Projects::editMilestone()"
@@ -36,6 +36,6 @@ class ProjectMilestones extends BaseModel
       description: description
       due_date: due_date
       state_event: state_event
-    @put "projects/#{Utils.parseProjectId projectId}/milestones/#{parseInt milestoneId}", params, (data) => fn data if fn
+    @put "projects/#{Utils.parseProjectId projectId}/milestones/#{parseInt milestoneId}", params, fn
 
 module.exports = (client) -> new ProjectMilestones client

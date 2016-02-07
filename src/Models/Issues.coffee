@@ -24,7 +24,7 @@ class Issues extends BaseModel
       issueId = encodeURIComponent(issueId)
     else
       issueId = parseInt(issueId)
-    @get "projects/#{projectId}/issues/#{issueId}", (data) => fn data if fn
+    @get "projects/#{projectId}/issues/#{issueId}", fn
 
   create: (projectId, params = {}, fn = null) =>
     @debug "Issues::create()"
@@ -33,7 +33,7 @@ class Issues extends BaseModel
     else
       projectId = parseInt(projectId)
 
-    @post "projects/#{projectId}/issues", params, (data) -> fn data if fn
+    @post "projects/#{projectId}/issues", params, fn
 
   edit: (projectId, issueId, params = {}, fn = null) =>
     @debug "Issues::edit()"
@@ -47,6 +47,6 @@ class Issues extends BaseModel
     else
       issueId = parseInt(issueId)
 
-    @put "projects/#{projectId}/issues/#{issueId}", params, (data) -> fn data if fn
+    @put "projects/#{projectId}/issues/#{issueId}", params, fn
 
 module.exports = (client) -> new Issues client
