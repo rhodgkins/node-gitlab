@@ -16,7 +16,7 @@ class Utils
           when 2 then fn err, items
           when 3 then fn err, null, items
     data = []
-    page_callback = (err, retData) =>
+    page_callback = (err, response, retData) =>
       if err
         return notify_fn(err)
       else if retData.length == params.per_page
